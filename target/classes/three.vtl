@@ -1,1 +1,10 @@
-<h1>Students chosen are: $name1, $name2, and $name3</h1>
+<h1>Students chosen are: </h1>
+
+<table style="background: hotpink">
+
+#foreach($name in $names)
+<tr>
+    <td>$name</td>
+</tr>
+#end
+</table>

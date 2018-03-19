@@ -6,9 +6,9 @@ import java.util.List;
 
 public class StudentList {
 
-    private List<String> names;
+    private static List<String> names;
 
-    public StudentList() {
+    public static String getRandomName() {
         names = new ArrayList<>();
         names.add("Angus");
         names.add("Chris");
@@ -28,42 +28,25 @@ public class StudentList {
         names.add("Sarah");
         names.add("Steven");
         names.add("Victor");
-    }
-
-    public static String getRandomName() {
         Collections.shuffle(names);
         return names.get(0);
     }
 
     public static List<String> getRandomTwoNames() {
-        List<String> picked = new ArrayList<>();
-        String name1 = getRandomName();
-        String name2 = getRandomName();
-        picked.add(name1);
-        while (picked.contains(name2)) {
-            name2 = getRandomName();
-        }
-        picked.add(name2);
-
-        return picked;
+        List<String> chosen = new ArrayList<>();
+        Collections.shuffle(names);
+        chosen.add(names.get(0));
+        chosen.add(names.get(1));
+        return chosen;
     }
 
     public static List<String> getRandomThreeNames() {
-        List<String> picked = new ArrayList<>();
-        String name1 = getRandomName();
-        String name2 = getRandomName();
-        String name3 = getRandomName();
-        picked.add(name1);
-        while (picked.contains(name2)) {
-            name2 = getRandomName();
-        }
-        picked.add(name2);
-        while (picked.contains(name3)) {
-            name3 = getRandomName();
-        }
-        picked.add(name3);
-
-        return picked;
+        Collections.shuffle(names);
+        List<String> chosen = new ArrayList<>();
+        chosen.add(names.get(0));
+        chosen.add(names.get(1));
+        chosen.add(names.get(2));
+        return chosen;
     }
 
 

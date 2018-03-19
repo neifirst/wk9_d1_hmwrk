@@ -3,19 +3,19 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.velocity.VelocityTemplateEngine;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static spark.Spark.get;
+import static spark.SparkBase.staticFileLocation;
+
 
 public class controller {
 
     public static void main(String[] args) {
 
         VelocityTemplateEngine velocityTemplateEngine = new VelocityTemplateEngine();
-
-
+        staticFileLocation("public");
 
 
         get("/one", (req, res) -> {
@@ -45,23 +45,9 @@ public class controller {
 
 
         get("/three", (req, res) -> {
-            List<String> chosen = new ArrayList<>();
-            String name1 = StudentList.getRandomName();
-            chosen.add(name1);
-            String name2 = StudentList.getRandomName();
-            while (chosen.contains(name2) == true) {
-                name2 = StudentList.getRandomName();
-            }
-            chosen.add(name2);
-            String name3 = StudentList.getRandomName();
-            while (chosen.contains(name3) == true) {
-                name3 = StudentList.getRandomName();
-            }
-            chosen.add(name3);
+            List<String> names = StudentList.getRandomThreeNames();
             HashMap<String, Object> model = new HashMap<>();
-            model.put("name1", name1);
-            model.put("name2", name2);
-            model.put("name3", name3);
+            model.put("names", names);
             model.put("template", "three.vtl");
             return new ModelAndView(model, "layout.vtl");
         }, velocityTemplateEngine);
